@@ -38,7 +38,9 @@ export async function parseRow<T extends string[]>(str: string, extension?: T): 
     );
 }
 
-export async function parseBoard(str: string): Promise<Board> {
+export async function parseBoard(str: string): Promise<Board>;
+export async function parseBoard<T extends string[]>(str: string, extension: T): Promise<Board<T>>;
+export async function parseBoard<T extends string[]>(str: string, extension?: T): Promise<Board<T>> {
     const rows = str.split("\n");
     
     if (rows.length !== 8) return Promise.reject(`invalid board height ${rows.length}`);

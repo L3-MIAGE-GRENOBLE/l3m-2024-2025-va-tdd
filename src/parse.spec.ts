@@ -171,7 +171,7 @@ describe("Parse : can parse a board", () => {
     });
 
     it("should be possible to parse the initial board with '0' cell indicating where it is possible to play", () => {
-        return parseBoard(initBoardWhereCanPlayStr).then(
+        return parseBoard<['0']>(initBoardWhereCanPlayStr, ['0']).then(
             (board) => deepStrictEqual(board, initBoardWhereCanPlay),
             fail
         );
