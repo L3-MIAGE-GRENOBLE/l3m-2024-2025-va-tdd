@@ -12,3 +12,10 @@ export type ReversiState<T extends Cell = Cell> = {
 export async function parseReversiState(str: string): Promise<ReversiState> {
     return Promise.reject('Not implemented');
 }
+
+export async function parseCell(str: string): Promise<Cell> {
+    switch (str) {
+        // case ".": return str;
+        default: return Promise.reject('Not implemented');
+    }
+}
