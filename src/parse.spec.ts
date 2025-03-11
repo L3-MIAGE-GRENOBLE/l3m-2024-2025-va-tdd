@@ -1,5 +1,46 @@
-import { parseCell, Cell, parseRow, Row, parseBoard, Board } from "./reversi.defs";
+import { parseCell, Cell, parseRow, Row, parseBoard, Board, parseReversiState } from "./reversi.defs";
 import { deepStrictEqual, fail } from "assert";
+
+const emptyBoardStr = `........
+........
+........
+........
+........
+........
+........
+........`;
+    
+    const initBoardStr = `........
+........
+........
+...BW...
+...WB...
+........
+........
+........`;
+    
+const emptyBoard: Board = [
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+];
+
+const initBoard: Board = [
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", "B", "W", ".", ".", "."],
+    [".", ".", ".", "W", "B", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+];
+
 
 describe("Parse : can parse a cell", () => {
     it("should be able to parse a serialized cell : '.'", async () => {
@@ -57,43 +98,6 @@ describe("Parse : can parse a row", () => {
 });
 
 describe("Parse : can parse a board", () => {
-    const emptyBoardStr = `........
-........
-........
-........
-........
-........
-........
-........`;
-    const emptyBoard: Board = [
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-    ];
-    
-    const initBoardStr = `........
-........
-........
-...BW...
-...WB...
-........
-........
-........`;
-    const initBoard: Board = [
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", "B", "W", ".", ".", "."],
-        [".", ".", ".", "W", "B", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-        [".", ".", ".", ".", ".", ".", ".", "."],
-    ];
     
     it("should be able to parse an empty board", async () => {
         const board = await parseBoard(emptyBoardStr);
@@ -146,4 +150,19 @@ describe("Parse : can parse a board", () => {
             (reason) => deepStrictEqual(reason, `invalid board height 7`)
         );
     });
+
+    
+});
+
+describe("Parse : can parse a reversi state", () => {
+    const initialReversiState = {
+        board: initBoard,
+        turn: 'B'
+    };
+
+    it("should be able to parse the initial reversi state", async () => {
+        const state = await parseReversiState(`${initBoardStr}\nB`);
+        deepStrictEqual(state, initialReversiState);
+    });
+    
 });

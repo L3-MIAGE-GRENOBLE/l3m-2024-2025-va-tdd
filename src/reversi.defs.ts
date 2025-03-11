@@ -9,10 +9,6 @@ export type ReversiState<T extends string[] = []> = {
     turn: Token;
 }
 
-export async function parseReversiState(str: string): Promise<ReversiState> {
-    return Promise.reject('Not implemented');
-}
-
 export async function parseCell(str: string): Promise<Cell>;
 export async function parseCell<T extends string[]>(str: string, extension: T): Promise<Cell<T>>;
 export async function parseCell<T extends string[]>(
@@ -49,4 +45,8 @@ export async function parseBoard(str: string): Promise<Board> {
     ) as [Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>];
 
     return Promise.all(LP);
+}
+
+export async function parseReversiState(str: string): Promise<ReversiState> {
+    return Promise.reject('Not implemented');
 }
