@@ -16,4 +16,10 @@ describe("Parse : can parse a cell", () => {
         const state = await parseCell("B");
         deepStrictEqual<Cell>(state, "B");
     });
+
+    it("should be able to parse a cell indicating that current player can play here (using '0')", async () => {
+        const state = await parseCell("0");
+        deepStrictEqual<Cell>(state, "0");
+    });
+
 });
