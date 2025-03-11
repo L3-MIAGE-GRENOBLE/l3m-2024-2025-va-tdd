@@ -33,6 +33,7 @@ export async function parseRow(str: string): Promise<Row>;
 export async function parseRow<T extends string[]>(str: string, extension: T): Promise<Row<T>>;
 export async function parseRow<T extends string[]>(str: string, extension?: T): Promise<Row<T>> {
     if (str.length !== 8) return Promise.reject(`invalid row length ${str.length}`);
+    extension = extension ?? [] as T;
     return Promise.all(
         str.split("").map((cell) => parseCell(cell, extension)) as [Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>]
     );
@@ -42,10 +43,12 @@ export async function parseBoard(str: string): Promise<Board>;
 export async function parseBoard<T extends string[]>(str: string, extension: T): Promise<Board<T>>;
 export async function parseBoard<T extends string[]>(str: string, extension?: T): Promise<Board<T>> {
     const rows = str.split("\n");
-    
+
     if (rows.length !== 8) return Promise.reject(`invalid board height ${rows.length}`);
+
+    extension = extension ?? [] as T;
     const LP = rows.map(
-        (r, i) => parseRow(r).catch( err => Promise.reject(`row ${i+1}: ${err}`) )
+        (r, i) => parseRow<T>(r, extension).catch( err => Promise.reject(`row ${i+1}: ${err}`) )
     ) as [Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>];
 
     return Promise.all(LP);
