@@ -10,7 +10,7 @@ const emptyBoardStr = `........
 ........
 ........`;
     
-    const initBoardStr = `........
+const initBoardStr = `........
 ........
 ........
 ...BW...
@@ -19,6 +19,16 @@ const emptyBoardStr = `........
 ........
 ........`;
     
+const initBoardWhereCanPlayStr = `........
+........
+....0...
+...BW0..
+..0WB...
+...0....
+........
+........
+B`;
+
 const emptyBoard: Board = [
     [".", ".", ".", ".", ".", ".", ".", "."],
     [".", ".", ".", ".", ".", ".", ".", "."],
@@ -41,6 +51,16 @@ const initBoard: Board = [
     [".", ".", ".", ".", ".", ".", ".", "."],
 ];
 
+const initBoardWhereCanPlay: Board<['0']> = [
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", "0", ".", ".", "."],
+    [".", ".", ".", "B", "W", "0", ".", "."],
+    [".", ".", "0", "W", "B", ".", ".", "."],
+    [".", ".", ".", "0", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+];
 
 describe("Parse : can parse a cell", () => {
     it("should be able to parse a serialized cell : '.'", async () => {
@@ -165,4 +185,36 @@ describe("Parse : can parse a reversi state", () => {
         deepStrictEqual(state, initialReversiState);
     });
     
+    it("should send an error if no turn", () => {
+        return parseReversiState(initBoardStr).then(
+            () => fail("should have failed"),
+            (reason) => deepStrictEqual(reason, `invalid turn ........`)
+        );
+    });
+
+    it("should send an error if board is too short", () => {
+        return parseReversiState(`........
+........
+........
+B`).then(
+            () => fail("should have failed"),
+            (reason) => deepStrictEqual(reason, `invalid board height 3`)
+        );
+    });
+
+    it("should send an error about invalid turn if empty string", () => {
+        return parseReversiState("").then(
+            () => fail("should have failed"),
+            (reason) => deepStrictEqual(reason, `invalid turn `)
+        );
+    });
+
+    it("should be able to parse a reversi state with some '0' cells", async () => {
+        const state = await parseReversiState(`${initBoardWhereCanPlayStr}`);
+        deepStrictEqual(state, {
+            board: initBoardWhereCanPlay,
+            turn: 'B'
+        });
+    });
+
 });
