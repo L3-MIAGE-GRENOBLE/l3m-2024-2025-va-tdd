@@ -26,17 +26,17 @@ describe("Parse : can parse a cell", () => {
 
 describe("Parse : can parse a row", () => {
     it("should be able to parse an empty row", async () => {
-        const state = await parseRow("........", []);
+        const state = await parseRow("........");
         deepStrictEqual<Row>(state, [".", ".", ".", ".", ".", ".", ".", "."]);
     });
 
     it("should be able to parse a row", async () => {
-        const state = await parseRow("....BW..", []);
+        const state = await parseRow("....BW..");
         deepStrictEqual<Row>(state, [".", ".", ".", ".", "B", "W", ".", "."]);
     });
 
     it("should be able to parse a row with indications of '0'", async () => {
-        const state = await parseRow("...0BW0.", []);
+        const state = await parseRow("...0BW0.", ["0"]);
         deepStrictEqual<Row<['0']>>(state, [".", ".", ".", "0", "B", "W", "0", "."]);
     });
 
