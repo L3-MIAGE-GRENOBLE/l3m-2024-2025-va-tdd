@@ -13,13 +13,20 @@ export async function parseReversiState(str: string): Promise<ReversiState> {
     return Promise.reject('Not implemented');
 }
 
-export async function parseCell<T extends string[]>(str: string): Promise<Cell<T>> {
+export async function parseCell(str: string): Promise<Cell>;
+export async function parseCell<T extends string[]>(str: string, extension: T): Promise<Cell<T>>;
+export async function parseCell<T extends string[]>(
+    str: string,
+    extension?: T
+): Promise<Cell<T>> {
     switch (str) {
         case ".":
         case "W":
         case "B":
-        case '0':
             return str;
-        default: return Promise.reject('Not implemented');
+        default:
+            return (extension && extension.includes(str))
+                 ? str
+                : Promise.reject(`unrecognized cell "${str}"`);
     }
 }
