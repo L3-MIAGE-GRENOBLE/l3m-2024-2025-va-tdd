@@ -130,7 +130,7 @@ describe("Parse : can parse a board", () => {
 ........
 ........`).then(
             () => fail("should have failed"),
-            (reason) => deepStrictEqual(reason, `invalid number of rows: 9`)
+            (reason) => deepStrictEqual(reason, `invalid board height 9`)
         );
     });
 

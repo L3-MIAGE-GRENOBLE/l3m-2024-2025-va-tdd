@@ -43,6 +43,7 @@ export async function parseRow<T extends string[]>(str: string, extension?: T): 
 export async function parseBoard(str: string): Promise<Board> {
     const rows = str.split("\n");
     
+    if (rows.length !== 8) return Promise.reject(`invalid board height ${rows.length}`);
     const LP = rows.map(
         (r, i) => parseRow(r).catch( err => Promise.reject(`row ${i+1}: ${err}`) )
     ) as [Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>];
