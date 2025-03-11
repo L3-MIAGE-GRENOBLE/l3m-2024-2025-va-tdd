@@ -29,4 +29,15 @@ describe("Parse : can parse a row", () => {
         const state = await parseRow("........", []);
         deepStrictEqual<Row>(state, [".", ".", ".", ".", ".", ".", ".", "."]);
     });
+
+    it("should be able to parse a row", async () => {
+        const state = await parseRow("....BW..", []);
+        deepStrictEqual<Row>(state, [".", ".", ".", ".", "B", "W", ".", "."]);
+    });
+
+    it("should be able to parse a row with indications of '0'", async () => {
+        const state = await parseRow("...0BW0.", []);
+        deepStrictEqual<Row<['0']>>(state, [".", ".", ".", "0", "B", "W", "0", "."]);
+    });
+
 });
