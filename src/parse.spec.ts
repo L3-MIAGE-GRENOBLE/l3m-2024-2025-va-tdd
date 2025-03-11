@@ -12,8 +12,8 @@ describe("Parse : can parse a cell", () => {
         deepStrictEqual<Cell>(state, "W");
     });
 
-    it("should be able to parse a serialized cell : 'W'", async () => {
-        const state = await parseCell("W");
-        deepStrictEqual<Cell>(state, "W");
+    it("should be able to parse a serialized cell : 'B'", async () => {
+        const state = await parseCell("B");
+        deepStrictEqual<Cell>(state, "B");
     });
 });
