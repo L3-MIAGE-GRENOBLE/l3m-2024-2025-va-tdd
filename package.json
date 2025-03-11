@@ -1,0 +1,19 @@
+{
+  "name": "l3m-2024-2025-va-tdd",
+  "version": "1.0.0",
+  "description": "Initiation TDD",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "mocha": "^11.1.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "l3m-2024-2025-va-tdd": "file:"
+  }
+}
