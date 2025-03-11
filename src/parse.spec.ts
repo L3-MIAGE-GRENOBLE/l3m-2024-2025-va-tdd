@@ -115,7 +115,7 @@ describe("Parse : can parse a board", () => {
 ........
 ........`).then(
             () => fail("should have failed"),
-            (reason) => deepStrictEqual(reason, `invalid row length 7`)
+            (reason) => deepStrictEqual(reason, `row 5: invalid row length 7`)
         );
     });
 });
