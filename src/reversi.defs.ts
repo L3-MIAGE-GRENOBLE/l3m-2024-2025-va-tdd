@@ -18,6 +18,7 @@ export async function parseCell<T extends string[]>(str: string): Promise<Cell<T
         case ".":
         case "W":
         case "B":
+        case '0':
             return str;
         default: return Promise.reject('Not implemented');
     }
