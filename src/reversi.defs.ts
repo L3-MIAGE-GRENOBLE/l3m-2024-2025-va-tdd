@@ -54,14 +54,17 @@ export async function parseBoard<T extends string[]>(str: string, extension?: T)
     return Promise.all(LP);
 }
 
-export async function parseReversiState(str: string): Promise<ReversiState> {
+export async function parseReversiState(str: string): Promise<ReversiState>;
+export async function parseReversiState<T extends string[]>(str: string, extension: T): Promise<ReversiState<T>>;
+export async function parseReversiState<T extends string[]>(str: string, extension?: T): Promise<ReversiState<T>> {
     const pos = str.lastIndexOf("\n");
     const boardStr = str.slice(0, pos);
     const turn = str.slice(pos + 1);
 
     if (turn !== "B" && turn !== "W") return Promise.reject(`invalid turn ${turn}`);
 
-    return parseBoard(boardStr).then(
+    extension = extension ?? [] as T;
+    return parseBoard<T>(boardStr, extension).then(
         board => ({ board, turn })
     );
 }

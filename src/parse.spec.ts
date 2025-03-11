@@ -215,7 +215,7 @@ B`).then(
     });
 
     it("should be able to parse a reversi state with some '0' cells", async () => {
-        const state = await parseReversiState(`${initBoardWhereCanPlayStr}`);
+        const state = await parseReversiState<['0']>(`${initBoardWhereCanPlayStr}\nB`, ['0'] );
         deepStrictEqual(state, {
             board: initBoardWhereCanPlay,
             turn: 'B'
