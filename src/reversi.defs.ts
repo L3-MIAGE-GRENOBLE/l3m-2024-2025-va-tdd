@@ -1,3 +1,5 @@
+import { parse } from "path";
+
 export type Token = 'W' | 'B';
 export type Cell<T extends string[] = []>  = Token | '.' | T[number];
 
@@ -48,5 +50,13 @@ export async function parseBoard(str: string): Promise<Board> {
 }
 
 export async function parseReversiState(str: string): Promise<ReversiState> {
-    return Promise.reject('Not implemented');
+    const pos = str.lastIndexOf("\n");
+    const boardStr = str.slice(0, pos);
+    const turn = str.slice(pos + 1);
+
+    if (turn !== "B" && turn !== "W") return Promise.reject(`invalid turn ${turn}`);
+
+    return parseBoard(boardStr).then(
+        board => ({ board, turn })
+    );
 }
