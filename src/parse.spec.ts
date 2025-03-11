@@ -214,12 +214,12 @@ B`).then(
         );
     });
 
-    // it("should be able to parse a reversi state with some '0' cells", async () => {
-    //     const state = await parseReversiState(`${initBoardWhereCanPlayStr}`);
-    //     deepStrictEqual(state, {
-    //         board: initBoardWhereCanPlay,
-    //         turn: 'B'
-    //     });
-    // });
+    it("should be able to parse a reversi state with some '0' cells", async () => {
+        const state = await parseReversiState(`${initBoardWhereCanPlayStr}`);
+        deepStrictEqual(state, {
+            board: initBoardWhereCanPlay,
+            turn: 'B'
+        });
+    });
 
 });
