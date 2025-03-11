@@ -30,3 +30,9 @@ export async function parseCell<T extends string[]>(
                 : Promise.reject(`unrecognized cell "${str}"`);
     }
 }
+
+export async function parseRow(str: string): Promise<Row>;
+export async function parseRow<T extends string[]>(str: string, extension: T): Promise<Row<T>>;
+export async function parseRow<T extends string[]>(str: string, extension?: T): Promise<Row<T>> {
+    return Promise.reject('Not implemented');
+}

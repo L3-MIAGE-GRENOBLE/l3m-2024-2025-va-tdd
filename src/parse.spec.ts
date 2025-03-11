@@ -1,4 +1,4 @@
-import { parseCell, Cell } from "./reversi.defs";
+import { parseCell, Cell, parseRow, Row } from "./reversi.defs";
 import { deepStrictEqual } from "assert";
 
 describe("Parse : can parse a cell", () => {
@@ -22,4 +22,11 @@ describe("Parse : can parse a cell", () => {
         deepStrictEqual<Cell<['0']>>(state, "0");
     });
 
+});
+
+describe("Parse : can parse a row", () => {
+    it("should be able to parse an empty row", async () => {
+        const state = await parseRow("........", []);
+        deepStrictEqual<Row>(state, [".", ".", ".", ".", ".", ".", ".", "."]);
+    });
 });
