@@ -1,11 +1,5 @@
-import * as chai from "chai";
-import { expect } from "chai";
-import chaiAsPromised from "chai-as-promised";
-
 import { parseCell, Cell, parseRow, Row } from "./reversi.defs";
-import { deepStrictEqual } from "assert";
-
-chai.use(chaiAsPromised);
+import { deepStrictEqual, fail } from "assert";
 
 describe("Parse : can parse a cell", () => {
     it("should be able to parse a serialized cell : '.'", async () => {
@@ -47,7 +41,17 @@ describe("Parse : can parse a row", () => {
     });
 
     it("should failed for longer row", async () => {
-        expect( (parseRow("...0BW0..", ["0"]) ) ).to.be.rejectedWith("invalid row length for \"...0BW0..\"");
+        return parseRow("...0BW0..", ["0"]).then(
+            () => fail("should have failed"),
+            (reason) => deepStrictEqual(reason, `invalid row length for "...0BW0.."`)
+        );
+    });
+
+    it("should failed for shorter row", async () => {
+        return parseRow(".0BW0..", ["0"]).then(
+            () => fail("should have failed"),
+            (reason) => deepStrictEqual(reason, `invalid row length for ".0BW0.."`)
+        );
     });
 
 });
