@@ -1,5 +1,11 @@
+import * as chai from "chai";
+import { expect } from "chai";
+import chaiAsPromised from "chai-as-promised";
+
 import { parseCell, Cell, parseRow, Row } from "./reversi.defs";
 import { deepStrictEqual } from "assert";
+
+chai.use(chaiAsPromised);
 
 describe("Parse : can parse a cell", () => {
     it("should be able to parse a serialized cell : '.'", async () => {
@@ -38,6 +44,10 @@ describe("Parse : can parse a row", () => {
     it("should be able to parse a row with indications of '0'", async () => {
         const state = await parseRow("...0BW0.", ["0"]);
         deepStrictEqual<Row<['0']>>(state, [".", ".", ".", "0", "B", "W", "0", "."]);
+    });
+
+    it("should failed for longer row", async () => {
+        expect( (parseRow("...0BW0..", ["0"]) ) ).to.be.rejectedWith("invalid row length for \"...0BW0..\"");
     });
 
 });
