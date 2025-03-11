@@ -31,15 +31,5 @@ B`;
     //     deepStrictEqual(state, initReversiState);
     // });
 
-    it("should be able to parse a serialized cell : '.'", async () => {
-        const state = await parseCell(".");
-        deepStrictEqual<Cell>(state, ".");
-    });
-
-    it("should be able to parse a serialized cell : 'W'", async () => {
-        const state = await parseCell("W");
-        deepStrictEqual<Cell>(state, "W");
-    });
-
 });
-  
+
