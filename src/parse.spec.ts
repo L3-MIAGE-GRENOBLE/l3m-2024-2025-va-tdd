@@ -1,4 +1,4 @@
-import { parseCell, Cell, parseRow, Row } from "./reversi.defs";
+import { parseCell, Cell, parseRow, Row, parseBoard, Board } from "./reversi.defs";
 import { deepStrictEqual, fail } from "assert";
 
 describe("Parse : can parse a cell", () => {
@@ -52,6 +52,57 @@ describe("Parse : can parse a row", () => {
             () => fail("should have failed"),
             (reason) => deepStrictEqual(reason, `invalid row length for ".0BW0.."`)
         );
+    });
+
+});
+
+describe("Parse : can parse a board", () => {
+    const emptyBoardStr = `........
+........
+........
+........
+........
+........
+........
+........`;
+    const emptyBoard: Board = [
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    
+    const initBoardStr = `........
+........
+........
+...BW...
+...WB...
+........
+........
+........`;
+    const initBoard: Board = [
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", "B", "W", ".", ".", "."],
+        [".", ".", ".", "W", "B", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    
+    it("should be able to parse an empty board", async () => {
+        const board = await parseBoard(emptyBoardStr);
+        deepStrictEqual(board, emptyBoard);
+    });
+
+    it("should be able to parse an initial board", async () => {
+        const board = await parseBoard(initBoardStr);
+        deepStrictEqual(board, initBoard);
     });
 
 });

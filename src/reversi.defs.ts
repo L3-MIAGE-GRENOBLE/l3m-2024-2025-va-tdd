@@ -39,3 +39,7 @@ export async function parseRow<T extends string[]>(str: string, extension?: T): 
         str.split("").map((cell) => parseCell(cell, extension)) as [Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>]
     );
 }
+
+export async function parseBoard(str: string): Promise<Board> {
+    return Promise.reject('Not implemented');
+}
