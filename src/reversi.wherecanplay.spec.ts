@@ -36,5 +36,10 @@ B`;
         deepStrictEqual<Cell>(state, ".");
     });
 
+    it("should be able to parse a serialized cell : 'W'", async () => {
+        const state = await parseCell("W");
+        deepStrictEqual<Cell>(state, "W");
+    });
+
 });
   
