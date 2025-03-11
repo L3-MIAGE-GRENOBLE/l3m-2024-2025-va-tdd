@@ -41,5 +41,11 @@ export async function parseRow<T extends string[]>(str: string, extension?: T): 
 }
 
 export async function parseBoard(str: string): Promise<Board> {
-    return Promise.reject('Not implemented');
+    const rows = str.split("\n");
+    
+    const LP = rows.map(
+        parseRow
+    ) as [Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>];
+
+    return Promise.all(LP);
 }
