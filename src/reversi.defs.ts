@@ -16,7 +16,9 @@ export async function parseReversiState(str: string): Promise<ReversiState> {
 export async function parseCell(str: string): Promise<Cell> {
     switch (str) {
         case ".":
-        case "W": return str;
+        case "W":
+        case "B":
+            return str;
         default: return Promise.reject('Not implemented');
     }
 }
