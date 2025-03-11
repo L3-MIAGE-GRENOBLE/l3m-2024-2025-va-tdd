@@ -1,65 +1,8 @@
+import { emptyBoardStr, emptyBoard, initBoardStr, initBoard, initBoardWhereCanPlayStr, initBoardWhereCanPlay, initReversiStateStr } from "./defs";
 import { parseCell, Cell, parseRow, Row, parseBoard, Board, parseReversiState } from "./reversi.defs";
 import { deepStrictEqual, fail } from "assert";
 
-const emptyBoardStr = `........
-........
-........
-........
-........
-........
-........
-........`;
-    
-const initBoardStr = `........
-........
-........
-...BW...
-...WB...
-........
-........
-........`;
-    
-const initBoardWhereCanPlayStr = `........
-........
-....0...
-...BW0..
-..0WB...
-...0....
-........
-........`;
 
-const emptyBoard: Board = [
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-];
-
-const initBoard: Board = [
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", "B", "W", ".", ".", "."],
-    [".", ".", ".", "W", "B", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-];
-
-const initBoardWhereCanPlay: Board<['0']> = [
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", "0", ".", ".", "."],
-    [".", ".", ".", "B", "W", "0", ".", "."],
-    [".", ".", "0", "W", "B", ".", ".", "."],
-    [".", ".", ".", "0", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-];
 
 describe("Parse : can parse a cell", () => {
     it("should be able to parse a serialized cell : '.'", async () => {
@@ -215,7 +158,7 @@ B`).then(
     });
 
     it("should be able to parse a reversi state with some '0' cells", async () => {
-        const state = await parseReversiState<['0']>(`${initBoardWhereCanPlayStr}\nB`, ['0'] );
+        const state = await parseReversiState<['0']>(initReversiStateStr, ['0'] );
         deepStrictEqual(state, {
             board: initBoardWhereCanPlay,
             turn: 'B'
