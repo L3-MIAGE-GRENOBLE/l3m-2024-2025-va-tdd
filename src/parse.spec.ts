@@ -43,14 +43,14 @@ describe("Parse : can parse a row", () => {
     it("should failed for longer row", async () => {
         return parseRow("...0BW0..", ["0"]).then(
             () => fail("should have failed"),
-            (reason) => deepStrictEqual(reason, `invalid row length for "...0BW0.."`)
+            (reason) => deepStrictEqual(reason, `invalid row length 9`)
         );
     });
 
     it("should failed for shorter row", async () => {
         return parseRow(".0BW0..", ["0"]).then(
             () => fail("should have failed"),
-            (reason) => deepStrictEqual(reason, `invalid row length for ".0BW0.."`)
+            (reason) => deepStrictEqual(reason, `invalid row length 7`)
         );
     });
 
@@ -115,7 +115,7 @@ describe("Parse : can parse a board", () => {
 ........
 ........`).then(
             () => fail("should have failed"),
-            (reason) => deepStrictEqual(reason, `invalid row length for "...WB.."`)
+            (reason) => deepStrictEqual(reason, `invalid row length 7`)
         );
     });
 });

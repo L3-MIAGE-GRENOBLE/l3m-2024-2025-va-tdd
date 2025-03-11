@@ -34,7 +34,7 @@ export async function parseCell<T extends string[]>(
 export async function parseRow(str: string): Promise<Row>;
 export async function parseRow<T extends string[]>(str: string, extension: T): Promise<Row<T>>;
 export async function parseRow<T extends string[]>(str: string, extension?: T): Promise<Row<T>> {
-    if (str.length !== 8) return Promise.reject(`invalid row length for "${str}"`);
+    if (str.length !== 8) return Promise.reject(`invalid row length ${str.length}`);
     return Promise.all(
         str.split("").map((cell) => parseCell(cell, extension)) as [Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>, Promise<Cell<T>>]
     );
