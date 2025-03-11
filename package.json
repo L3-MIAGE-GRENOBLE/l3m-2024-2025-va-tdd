@@ -4,13 +4,15 @@
   "description": "Initiation TDD",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w"
+    "test": "mocha -w",
+    "test-coverage": "nyc --reporter=html --reporter=text mocha"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "mocha": "^11.1.0",
+    "nyc": "^17.1.0",
     "ts-node": "^10.9.2"
   },
   "dependencies": {
