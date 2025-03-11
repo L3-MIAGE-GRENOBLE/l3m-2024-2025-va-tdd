@@ -44,7 +44,7 @@ export async function parseBoard(str: string): Promise<Board> {
     const rows = str.split("\n");
     
     const LP = rows.map(
-        parseRow
+        (r, i) => parseRow(r).catch( err => Promise.reject(`row ${i+1}: ${err}`) )
     ) as [Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>, Promise<Row>];
 
     return Promise.all(LP);
