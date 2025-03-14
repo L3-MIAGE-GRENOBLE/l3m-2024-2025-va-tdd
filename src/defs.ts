@@ -1,4 +1,4 @@
-import { Board, ReversiState } from "./reversi.defs";
+import { Board, ReversiState, Row } from "./reversi.defs";
 
 export const emptyBoardStr = `........
 ........
@@ -60,16 +60,11 @@ export const initBoardWhereCanPlay: Board<['0']> = [
     [".", ".", ".", ".", ".", ".", ".", "."],
 ];
 
-export const initBoardWhereCanPlayH: Board<['0']> = [
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", "B", "W", "0", ".", "."],
-    [".", ".", "0", "W", "B", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."],
-];
+export const initRow: Row<['0']> = 
+    [".", ".", ".", "B", "W", ".", ".", "."];
+
+export const initBoardRowWhereCanPlayH: Row<['0']> =
+    [".", ".", ".", "B", "W", "0", ".", "."];
 
 export const initBoardWhereCanPlayV: Board<['0']> = [
     [".", ".", ".", ".", ".", ".", ".", "."],

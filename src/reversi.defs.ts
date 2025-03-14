@@ -1,4 +1,3 @@
-import { parse } from "path";
 
 export type Token = 'W' | 'B';
 export type Cell<T extends string[] = []>  = Token | '.' | T[number];
@@ -67,4 +66,20 @@ export async function parseReversiState<T extends string[]>(str: string, extensi
     return parseBoard<T>(boardStr, extension).then(
         board => ({ board, turn })
     );
+}
+
+export async function displayWhereToPlayH(row: Row): Promise<Row> {
+    return Promise.reject("Not yet implemented")
+}
+
+export async function displayWhereToPlayV(board: Promise<Board>): Promise<Board> {
+    return Promise.reject("Not yet implemented")
+}
+
+export async function displayWhereToPlayD(board: Promise<Board>): Promise<Board> {
+    return Promise.reject("Not yet implemented")
+}
+
+export async function displayWhereToPlay(board: Board): Promise<Board> {
+    return Promise.reject("Not yet implemented")
 }

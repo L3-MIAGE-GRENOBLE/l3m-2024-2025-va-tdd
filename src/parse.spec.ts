@@ -1,4 +1,4 @@
-import { emptyBoardStr, emptyBoard, initBoardStr, initBoard, initBoardWhereCanPlayStr, initBoardWhereCanPlay, initReversiStateStr } from "./defs";
+import { emptyBoardStr, emptyBoard, initBoardStr, initBoard, initBoardWhereCanPlayStr, initBoardWhereCanPlay, initReversiStateStr, initBoardWhereCanPlayH, initBoardWhereCanPlayV, initBoardWhereCanPlayD } from "./defs";
 import { parseCell, Cell, parseRow, Row, parseBoard, Board, parseReversiState } from "./reversi.defs";
 import { deepStrictEqual, fail } from "assert";
 
@@ -164,5 +164,35 @@ B`).then(
             turn: 'B'
         });
     });
+});
 
+    describe("State : can 0 where to play", () => {
+    const initialReversiState = {
+        board: initBoard,
+        turn: 'B'
+    };
+
+    it("State: display horizontally where we can play", async () => {
+        const state = await parseReversiState<['0']>(initReversiStateStr, ['0'] );
+        deepStrictEqual(state, {
+            board: initBoardWhereCanPlayH,
+            turn: 'B'
+        });
+    });
+
+    it("State: display vertically where we can play", async () => {
+        const state = await parseReversiState<['0']>(initReversiStateStr, ['0'] );
+        deepStrictEqual(state, {
+            board: initBoardWhereCanPlayV,
+            turn: 'B'
+        });
+    });
+
+    it("State: display diagonally where we can play", async () => {
+        const state = await parseReversiState<['0']>(initReversiStateStr, ['0'] );
+        deepStrictEqual(state, {
+            board: initBoardWhereCanPlayD,
+            turn: 'B'
+        });
+    });
 });
