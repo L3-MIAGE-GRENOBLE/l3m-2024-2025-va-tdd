@@ -1,5 +1,5 @@
-import { emptyBoardStr, emptyBoard, initBoardStr, initBoard, initBoardWhereCanPlayStr, initBoardWhereCanPlay, initReversiStateStr, initBoardWhereCanPlayH, initBoardWhereCanPlayV, initBoardWhereCanPlayD } from "./defs";
-import { parseCell, Cell, parseRow, Row, parseBoard, Board, parseReversiState } from "./reversi.defs";
+import { emptyBoardStr, emptyBoard, initBoardStr, initBoard, initBoardWhereCanPlayStr, initBoardWhereCanPlay, initReversiStateStr, initBoardWhereCanPlayV, initBoardWhereCanPlayD, initRow, initBoardRowWhereCanPlayH } from "./defs";
+import { parseCell, Cell, parseRow, Row, parseBoard, Board, parseReversiState, displayWhereToPlayH } from "./reversi.defs";
 import { deepStrictEqual, fail } from "assert";
 
 
@@ -173,9 +173,9 @@ B`).then(
     };
 
     it("State: display horizontally where we can play", async () => {
-        const state = await parseReversiState<['0']>(initReversiStateStr, ['0'] );
+        const state = await displayWhereToPlayH(initBoard);
         deepStrictEqual(state, {
-            board: initBoardWhereCanPlayH,
+            board: initBoardRowWhereCanPlayH,
             turn: 'B'
         });
     });

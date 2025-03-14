@@ -68,7 +68,7 @@ export async function parseReversiState<T extends string[]>(str: string, extensi
     );
 }
 
-export async function displayWhereToPlayH(row: Row): Promise<Row> {
+export async function displayWhereToPlayH(board: Board): Promise<Board> {
     return Promise.reject("Not yet implemented")
 }
 
@@ -76,7 +76,7 @@ export async function displayWhereToPlayV(board: Promise<Board>): Promise<Board>
     return Promise.reject("Not yet implemented")
 }
 
-export async function displayWhereToPlayD(board: Promise<Board>): Promise<Board> {
+export async function displayWhereToPlayD(board: Board): Promise<Board> {
     return Promise.reject("Not yet implemented")
 }
 
