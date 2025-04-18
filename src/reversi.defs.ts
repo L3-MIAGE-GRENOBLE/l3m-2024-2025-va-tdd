@@ -10,6 +10,9 @@ export type ReversiState<T extends string[] = []> = {
     turn: Token;
 }
 
+export type Coords = [number,number];
+export type CoordsTab = Coords[];
+
 export async function parseCell(str: string): Promise<Cell>;
 export async function parseCell<T extends string[]>(str: string, extension: T): Promise<Cell<T>>;
 export async function parseCell<T extends string[]>(
@@ -67,19 +70,39 @@ export async function parseReversiState<T extends string[]>(str: string, extensi
         board => ({ board, turn })
     );
 }
-
-export async function displayWhereToPlayH(board: Board): Promise<Board> {
-    return Promise.reject("Not yet implemented")
+//affiche les position joubale en horizontal TODO
+export function displayWhereToPlayH(state: ReversiState, coords :CoordsTab): ReversiState {
+    return state
 }
-
-export async function displayWhereToPlayV(board: Promise<Board>): Promise<Board> {
-    return Promise.reject("Not yet implemented")
+//affiche les position joubale en vertical TODO
+export function displayWhereToPlayV(state: ReversiState,coords :CoordsTab): ReversiState {
+    return state
 }
-
-export async function displayWhereToPlayD(board: Board): Promise<Board> {
-    return Promise.reject("Not yet implemented")
+//affiche les position joubale en diagonale TODO
+export function displayWhereToPlayD(state: ReversiState,coords :CoordsTab): ReversiState {
+    return state
 }
-
-export async function displayWhereToPlay(board: Board): Promise<Board> {
-    return Promise.reject("Not yet implemented")
+//regroupe les displayWhereToPlay TODO
+export function displayWhereToPlay(state: ReversiState): ReversiState {
+    let coords = searchToken(state);
+    return state;
+}
+//cherche les position des points jouables TODO
+export function searchIfCanPlay(state: ReversiState, x: number, y: number, direction: DirectionEnum): Coords | undefined {
+    return undefined;
+}
+//cherche les tokens du joueur TODO
+export function searchToken(state: ReversiState) : CoordsTab {
+    return [] ;
+}
+// utile pour les directions où faire la recherche 
+export enum DirectionEnum {
+    HautGauche,
+    Haut,
+    HautDroite,
+    Droite,
+    BasDroite,
+    Bas,
+    BasGauche,
+    Gauche
 }
